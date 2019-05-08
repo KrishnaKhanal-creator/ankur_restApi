@@ -4,6 +4,8 @@ import com.ankur.inventory.domain.InventoryAddItemRequest;
 import com.ankur.inventory.domain.InventoryAddItemResponse;
 import com.ankur.inventory.domain.InventoryFindByIdRequest;
 import com.ankur.inventory.domain.InventoryFindByIdResponse;
+import com.ankur.inventory.domain.InventoryFindByNameRequest;
+import com.ankur.inventory.domain.InventoryFindByNameResponse;
 import com.ankur.inventory.domain.InventoryListAllResponse;
 import com.ankur.inventory.domain.InventoryRemoveItemRequest;
 import com.ankur.inventory.domain.InventoryRemoveItemResponse;
@@ -11,8 +13,11 @@ import com.ankur.inventory.domain.InventoryUpdateItemRequest;
 import com.ankur.inventory.domain.InventoryUpdateItemResponse;
 import com.ankur.inventory.domain.Item;
 import com.ankur.inventory.domain.Status;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,19 +28,18 @@ public class InventoryService {
     private Map<Integer, Item> db = new HashMap<>();
 
 
-
-    public InventoryService(){
-        db.put(1,new Item(1,"Lamp",99.67f));
-        db.put(2,new Item(2,"Table",100.33f));
-        db.put(3,new Item(3,"Chair",65.99f));
+    public InventoryService() {
+        db.put(1, new Item(1, "Lamp", 99.67f));
+        db.put(2, new Item(2, "Table", 100.33f));
+        db.put(3, new Item(3, "Chair", 65.99f));
     }
 
 
-    public ResponseEntity<?> listAll(){
+    public ResponseEntity<?> listAll() {
         return new ResponseEntity<InventoryListAllResponse>(new InventoryListAllResponse(db.values()), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> findById(InventoryFindByIdRequest request){
+    public ResponseEntity<?> findById(InventoryFindByIdRequest request) {
         return new ResponseEntity<InventoryFindByIdResponse>(new InventoryFindByIdResponse(db.get(request.getItemId())), HttpStatus.OK);
 
     }
@@ -44,29 +48,29 @@ public class InventoryService {
     public ResponseEntity<?> add(InventoryAddItemRequest request) {
         InventoryAddItemResponse response = null;
         Item item = request.getItem();
-        if(item!=null && item.getId()!=null){
+        if (item != null && item.getId() != null) {
             if (db.containsKey(item.getId())) {
                 response = new InventoryAddItemResponse(Status.CANNOT_ADD_ITEM_ALREADY_EXISTS);
-            }else {
+            } else {
                 db.put(request.getItem().getId(), request.getItem());
                 response = new InventoryAddItemResponse(Status.SUCCESS);
             }
         }
-            return new ResponseEntity<InventoryAddItemResponse>(response,HttpStatus.OK);
+        return new ResponseEntity<InventoryAddItemResponse>(response, HttpStatus.OK);
     }
 
     public ResponseEntity<?> update(InventoryUpdateItemRequest request) {
         InventoryUpdateItemResponse response = null;
 
         Item item = request.getItem();
-        if(item!=null && item.getId()!=null && db.containsKey(item.getId())){
-            db.put(item.getId(),item);
+        if (item != null && item.getId() != null && db.containsKey(item.getId())) {
+            db.put(item.getId(), item);
             response = new InventoryUpdateItemResponse(Status.SUCCESS);
-        }else{
+        } else {
             response = new InventoryUpdateItemResponse(Status.CANNOT_UPDATE_ITEM_DOES_NOT_EXIST);
         }
 
-        return new ResponseEntity<InventoryUpdateItemResponse>(response,HttpStatus.OK);
+        return new ResponseEntity<InventoryUpdateItemResponse>(response, HttpStatus.OK);
     }
 
     public ResponseEntity<?> remove(InventoryRemoveItemRequest request) {
@@ -74,13 +78,27 @@ public class InventoryService {
         InventoryRemoveItemResponse response = null;
 
         Integer itemId = request.getItemId();
-        if(itemId!=null && db.containsKey(itemId)){
+        if (itemId != null && db.containsKey(itemId)) {
             db.remove(itemId);
             response = new InventoryRemoveItemResponse(Status.SUCCESS);
-        }else{
+        } else {
             response = new InventoryRemoveItemResponse(Status.CANNOT_REMOVE_ITEM_DOES_NOT_EXIST);
         }
 
-        return new ResponseEntity<InventoryRemoveItemResponse>(response,HttpStatus.OK);
+        return new ResponseEntity<InventoryRemoveItemResponse>(response, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> findByName(InventoryFindByNameRequest request) {
+        List<Item> result = new ArrayList<>();
+        InventoryFindByNameResponse response = new InventoryFindByNameResponse(result);
+        String name = StringUtils.trimToNull(request.getName());
+        if (name != null) {
+            for (Item item : db.values()) {
+                if(item.getName().equalsIgnoreCase(name)){
+                    result.add(item);
+                }
+            }
+        }
+        return new ResponseEntity<InventoryFindByNameResponse>(response, HttpStatus.OK);
     }
 }

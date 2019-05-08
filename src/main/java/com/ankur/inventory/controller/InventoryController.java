@@ -4,6 +4,8 @@ import com.ankur.inventory.domain.InventoryAddItemRequest;
 import com.ankur.inventory.domain.InventoryAddItemResponse;
 import com.ankur.inventory.domain.InventoryFindByIdRequest;
 import com.ankur.inventory.domain.InventoryFindByIdResponse;
+import com.ankur.inventory.domain.InventoryFindByNameRequest;
+import com.ankur.inventory.domain.InventoryFindByNameResponse;
 import com.ankur.inventory.domain.InventoryListAllResponse;
 import com.ankur.inventory.domain.InventoryRemoveItemRequest;
 import com.ankur.inventory.domain.InventoryRemoveItemResponse;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/inventory/services")
-@Api(value = "/inventory/services", tags = ("inventory,inventory-management"))
+@Api(value = "/inventory/services", tags = ("Inventory Management"))
 public class InventoryController {
 
     private static final String CLIENT_ID = "client-id";
@@ -37,11 +39,15 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-//public List<Item> findByName(){
-//        return null;
-//}
-//
 
+    @RequestMapping(value = "findByName", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ApiOperation(value = "findByName", notes = "Finds an inventory item by name", nickname = "findByName")
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Missing / invalid parameter", response = ServiceErrorResponse.class),
+            @ApiResponse(code = 200, message = "Success", response = InventoryFindByNameResponse.class)})
+    public ResponseEntity<?> findByName(@RequestHeader(value = CLIENT_ID) String clientId,
+                                    @Valid @RequestBody InventoryFindByNameRequest request) {
+        return inventoryService.findByName(request);
+    }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ApiOperation(value = "remove", notes = "Removes an item from the Inventory", nickname = "remove")

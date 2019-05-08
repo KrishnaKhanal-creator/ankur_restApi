@@ -25,9 +25,9 @@ public class SwaggerConfiguration {
                 .title("Inventory Management Microservice")
                 .description("This service provides CRUD operations for Inventory Management.")
                 .license("Ankur Israni")
-                .termsOfServiceUrl("")
+                .termsOfServiceUrl("http://www.4algos.com")
                 .version("0.0.1")
-                .contact(new Contact("Ankur Israni","www.4algos.com", "onlyankur@gmail.com"))
+                .contact(new Contact("Ankur Israni","http://www.4algos.com", "onlyankur@gmail.com"))
                 .build();
     }
 

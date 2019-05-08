@@ -5,6 +5,7 @@
 *.ipr
 *.iws
 *_IS_UNDEFINED
+*.class
 
 # Ignore hidden files, but not .gitignore
 .*
@@ -39,11 +40,6 @@ logs
 node_modules
 out
 tmp
-
-
-
-
-
 
 webapps/package-lock.json
 webapps/sdfc-web/package-lock.json
