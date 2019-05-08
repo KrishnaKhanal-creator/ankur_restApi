@@ -32,6 +32,7 @@ public class InventoryService {
         db.put(1, new Item(1, "Lamp", 99.67f));
         db.put(2, new Item(2, "Table", 100.33f));
         db.put(3, new Item(3, "Chair", 65.99f));
+        db.put(4, new Item(4, "Alladin's Lamp", 67.99f));
     }
 
 
@@ -90,15 +91,17 @@ public class InventoryService {
 
     public ResponseEntity<?> findByName(InventoryFindByNameRequest request) {
         List<Item> result = new ArrayList<>();
-        InventoryFindByNameResponse response = new InventoryFindByNameResponse(result);
+        Status status = Status.NO_NAME_MATCH;
         String name = StringUtils.trimToNull(request.getName());
         if (name != null) {
             for (Item item : db.values()) {
-                if(item.getName().equalsIgnoreCase(name)){
+                if(item.getName().contains(name)){
                     result.add(item);
+                    status=Status.SUCCESS;
                 }
             }
         }
+        InventoryFindByNameResponse response = new InventoryFindByNameResponse(result,status);
         return new ResponseEntity<InventoryFindByNameResponse>(response, HttpStatus.OK);
     }
 }

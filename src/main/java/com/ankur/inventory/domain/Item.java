@@ -34,7 +34,7 @@ public class Item {
         return name;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 }
