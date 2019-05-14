@@ -1,7 +1,6 @@
 package com.ankur.inventory.domain;
 
 import java.util.Collection;
-import java.util.List;
 
 public class InventoryFindByNameResponse {
 

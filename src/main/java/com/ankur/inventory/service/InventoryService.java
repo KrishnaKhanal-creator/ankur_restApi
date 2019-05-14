@@ -41,8 +41,15 @@ public class InventoryService {
     }
 
     public ResponseEntity<?> findById(InventoryFindByIdRequest request) {
-        return new ResponseEntity<InventoryFindByIdResponse>(new InventoryFindByIdResponse(db.get(request.getItemId())), HttpStatus.OK);
-
+        Integer id = request.getItemId();
+        Item item = db.get(id);
+        if(item!=null) {
+            return new ResponseEntity<InventoryFindByIdResponse>(new InventoryFindByIdResponse(item),
+                    HttpStatus.OK);
+        }
+        Item itemNotFound = new Item(-1,"Not Found",-1f);
+        return new ResponseEntity<InventoryFindByIdResponse>(new InventoryFindByIdResponse(itemNotFound),
+                HttpStatus.OK);
     }
 
 
@@ -95,7 +102,7 @@ public class InventoryService {
         String name = StringUtils.trimToNull(request.getName());
         if (name != null) {
             for (Item item : db.values()) {
-                if(item.getName().contains(name)){
+                if( StringUtils.containsIgnoreCase(item.getName(),name)){
                     result.add(item);
                     status=Status.SUCCESS;
                 }
