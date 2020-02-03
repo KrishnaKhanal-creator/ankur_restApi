@@ -28,7 +28,7 @@ pipeline{
                             steps{
                                 echo 'starting service..........'
                                 withMaven(maven: 'maven_3_6_3'){
-                                    sh 'mvn spring-boot:stop'
+                                    //sh 'mvn spring-boot:stop'
                                     sh 'mvn spring-boot:run'
                                    // echo "mvn spring-boot:run" | at now + 1 minutes
                                 }
