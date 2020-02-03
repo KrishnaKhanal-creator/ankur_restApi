@@ -24,6 +24,7 @@ pipeline{
                 }
             }
 
+/*
             stage('deploy'){
                 steps{
                     echo 'Deployment in progress............'
@@ -32,6 +33,7 @@ pipeline{
                     }
                 }
             }
+*/
         }
     }
 
