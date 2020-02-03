@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     stages{
-        stage("compile"){
+        stage('compile'){
             steps{
                 echo 'Compiling............'
                 withMaven(maven: 'maven_3_5_0'){
@@ -10,7 +10,7 @@ pipeline{
                 }
             }
 
-            stage("test"){
+            stage('test'){
                 steps{
                     echo 'Running tests............'
                     withMaven(maven: 'maven_3_5_0'){
