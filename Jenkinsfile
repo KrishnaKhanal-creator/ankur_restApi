@@ -1,6 +1,7 @@
 pipeline{
     agent any
     tools {
+            /**This is configured with this exact name in 'Manage Jenkins > Global Tool Configuration > Maven'*/
             maven 'maven_3_6_3'
         }
 
@@ -10,7 +11,7 @@ pipeline{
             stage('test'){
                 steps{
                     echo 'Running tests............'
-                    withMaven(maven: 'maven_3_6_3'){
+                    maven(maven: 'maven_3_6_3'){
                         sh 'mvn test'
                     }
                 }
