@@ -32,7 +32,8 @@ pipeline{
                                    // sh 'mvn spring-boot:run'
                                    // echo "mvn spring-boot:run" | at now + 1 minutes
                                    echo "launching mvn spring-boot:run"
-                                  sh "timeout -s KILL 4m mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true || true"
+                                  //sh "timeout -s KILL 4m mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true || true"
+                                  sh "timeout -s  4m mvn spring-boot:run  || true"
                                 }
                             }
                         }
