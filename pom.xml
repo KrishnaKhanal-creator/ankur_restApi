@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ankur</groupId>
-	<artifactId>Inventory</artifactId>
+	<artifactId>RestService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Inventory</name>
 	<description>Inventory Management</description>
@@ -55,6 +55,8 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <!-- <version>2.9.5</version> -->
         </dependency>
+
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
