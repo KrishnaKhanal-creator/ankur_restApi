@@ -7,11 +7,18 @@ pipeline{
 
     stages {
 
-
+          stage('build'){
+                steps{
+                    echo 'Building............'
+                    withMaven(maven: 'maven_3_6_3'){
+                        sh 'mvn clean compile'
+                    }
+                }
+            }
             stage('test'){
                 steps{
                     echo 'Running tests............'
-                    maven(maven: 'maven_3_6_3'){
+                    withMaven(maven: 'maven_3_6_3'){
                         sh 'mvn test'
                     }
                 }
