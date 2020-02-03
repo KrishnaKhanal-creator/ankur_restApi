@@ -29,8 +29,10 @@ pipeline{
                                 echo 'starting service..........'
                                 withMaven(maven: 'maven_3_6_3'){
                                     //sh 'mvn spring-boot:stop'
-                                    sh 'mvn spring-boot:run'
+                                   // sh 'mvn spring-boot:run'
                                    // echo "mvn spring-boot:run" | at now + 1 minutes
+                                   echo "launching mvn spring-boot:run"
+                                  sh "timeout -s KILL 1m mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true || true"
                                 }
                             }
                         }
