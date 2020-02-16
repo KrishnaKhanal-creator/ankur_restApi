@@ -30,7 +30,7 @@ pipeline{
 
                     // echo """ 'mvn spring-boot:run' | at now + 1 minutes """
                    // sh """ 'nohup mvn spring-boot:run & || true' """
-                   sh """ 'timeout -s KILL 4m mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true || true' """
+                   sh """ 'nohup mvn spring-boot:run || true &' """
 
             }
         }
