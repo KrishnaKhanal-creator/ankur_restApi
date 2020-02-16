@@ -30,7 +30,11 @@ pipeline{
 
                     // echo """ 'mvn spring-boot:run' | at now + 1 minutes """
                    // sh """ 'nohup mvn spring-boot:run & || true' """
-                   sh """ 'nohup mvn spring-boot:run || true &' """
+                   //sh """ 'nohup mvn spring-boot:run || true &' """
+
+                withMaven(maven: 'maven_3_6_3'){
+                    sh 'mvn install'
+                }
 
             }
         }
