@@ -48,7 +48,7 @@ pipeline{
                         //sh """ 'java -jar RestService-0.0.1-SNAPSHOT.jar' """
 
                          withMaven(maven: 'maven_3_6_3'){
-                               sh """ 'mvn spring-boot:run' | at now + 1 minutes """
+                               sh """ 'mvn spring-boot:run' """
                         }
 
                 }
