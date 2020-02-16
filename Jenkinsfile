@@ -46,7 +46,10 @@ pipeline{
                     echo 'Deployment in progress............'
                         sh """ chmod 777 /Users/ankur/.jenkins/workspace/rest_service_dsl_pipeline/target/RestService-0.0.1-SNAPSHOT.jar """
                         //sh """ 'java -jar RestService-0.0.1-SNAPSHOT.jar' """
-                        sh """ 'echo mvn spring-boot:run' | at now + 1 minutes """
+
+                         withMaven(maven: 'maven_3_6_3'){
+                               sh """ 'mvn spring-boot:run' | at now + 1 minutes """
+                        }
 
                 }
             }
