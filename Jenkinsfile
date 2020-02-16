@@ -40,16 +40,16 @@ pipeline{
         }
 
 
-/*
+
             stage('deploy'){
                 steps{
                     echo 'Deployment in progress............'
                     withMaven(maven: 'maven_3_6_3'){
-                        sh 'mvn deploy'
+                        java -jar '/Users/ankur/.jenkins/workspace/rest_service_dsl_pipeline/target/RestService-0.0.1-SNAPSHOT.jar'
                     }
                 }
             }
-*/
+
     }
 }
 
