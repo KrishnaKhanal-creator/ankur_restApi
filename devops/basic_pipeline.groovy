@@ -26,31 +26,35 @@ pipeline{
 
         stage('run'){
             steps{
-                echo 'starting service..........'
+                echo 'Installing service..........'
+
+                // echo """ 'mvn spring-boot:run' | at now + 1 minutes """
+                // sh """ 'nohup mvn spring-boot:run & || true' """
+                //sh """ 'nohup mvn spring-boot:run || true &' """
+
                 withMaven(maven: 'maven_3_6_3'){
-                    //sh 'mvn spring-boot:stop'
-                    // sh 'mvn spring-boot:run'
-                    // echo "mvn spring-boot:run" | at now + 1 minutes
-                    //echo "launching mvn spring-boot:run"
-                    //sh "timeout -s KILL 4m mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true || true"
-                    // sh "nohup mvn spring-boot:run || true &"
-                    // sh "nohup mvn spring-boot:run & || true"
-                    echo "mvn spring-boot:run" | at now + 1 minutes
+                    sh 'mvn install'
                 }
+
             }
         }
 
 
-/*
-            stage('deploy'){
-                steps{
-                    echo 'Deployment in progress............'
-                    withMaven(maven: 'maven_3_6_3'){
-                        sh 'mvn deploy'
-                    }
+
+        stage('deploy'){
+            steps{
+                echo 'Deployment in progress............'
+                sh """ chmod 777 /Users/ankur/.jenkins/workspace/rest_service_dsl_pipeline/target/RestService-0.0.1-SNAPSHOT.jar """
+                //sh """ 'java -jar RestService-0.0.1-SNAPSHOT.jar' """
+
+                withMaven(maven: 'maven_3_6_3'){
+                    sh """ nohup mvn spring-boot:run || true"""
+                    sh """ echo true """
                 }
+
             }
-*/
+        }
+
     }
 }
 

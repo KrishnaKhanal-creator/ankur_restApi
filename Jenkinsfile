@@ -20,6 +20,7 @@ pipeline{
                 echo 'Running tests............'
                 withMaven(maven: 'maven_3_6_3'){
                     sh 'mvn test'
+                    sh 'mvn surefire-report:report'
                 }
             }
         }
