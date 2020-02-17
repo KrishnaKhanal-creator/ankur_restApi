@@ -28,7 +28,7 @@ public class InventoryServiceTests {
         Collection<Item> items =  response.getBody().getItems();
         items.forEach(item->{
             assertTrue(item.getName().contains("Lamp"));
-            throw new RuntimeException("causing the build to fail");
+           // throw new RuntimeException("causing the build to fail");
         });
     }
 
