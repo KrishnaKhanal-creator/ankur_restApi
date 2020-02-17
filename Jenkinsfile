@@ -50,7 +50,7 @@ pipeline{
                          withMaven(maven: 'maven_3_6_3'){
                               // sh """ echo nohup mvn spring-boot:run || true"""
                               sh """ nohup mvn spring-boot:run || true"""
-                              sh "echo true"
+                              sh """ echo true """
                         }
 
                 }
