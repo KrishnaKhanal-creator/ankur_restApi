@@ -48,8 +48,9 @@ pipeline{
                         //sh """ 'java -jar RestService-0.0.1-SNAPSHOT.jar' """
 
                          withMaven(maven: 'maven_3_6_3'){
-                              // sh """ echo nohup mvn spring-boot:run || true"""
-                              sh """ nohup mvn spring-boot:run || true"""
+                              //Commented next line because even though service starts, the jenkins job never ends.
+//                            sh """ nohup mvn spring-boot:run || true"""
+
                               sh """ echo true """
                         }
 
