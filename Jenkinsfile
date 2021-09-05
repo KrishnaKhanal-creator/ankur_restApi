@@ -10,18 +10,11 @@ pipeline{
         stage('build'){
             steps{
                 echo 'Building............'
-                withMaven(maven: 'maven_3_6_3'){
-                    sh 'mvn clean compile'
-                }
             }
         }
         stage('test'){
             steps{
                 echo 'Running tests............'
-                withMaven(maven: 'maven_3_6_3'){
-                    sh 'mvn test'
-                    sh 'mvn surefire-report:report'
-                }
             }
         }
 
@@ -33,9 +26,7 @@ pipeline{
                    // sh """ 'nohup mvn spring-boot:run & || true' """
                    //sh """ 'nohup mvn spring-boot:run || true &' """
 
-                withMaven(maven: 'maven_3_6_3'){
-                    sh 'mvn install'
-                }
+  
 
             }
         }
