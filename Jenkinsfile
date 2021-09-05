@@ -42,10 +42,7 @@ pipeline{
 
                         //sh """ 'java -jar RestService-0.0.1-SNAPSHOT.jar' """
 
-                         withMaven(maven: 'maven_3_6_3'){
-                           sh """ nohup mvn spring-boot:run || true"""
-                           sh """ echo true """
-                        }
+                
 
                 }
             }
