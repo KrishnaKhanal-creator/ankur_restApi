@@ -10,9 +10,9 @@ pipeline{
         stage('build'){
             steps{
                 echo 'Building............'
-                withMaven(maven: 'maven_3_6_3'){
-                    sh 'mvn clean compile'
-                }
+//                 withMaven(maven: 'maven_3_6_3'){
+//                     sh 'mvn clean compile'
+//                 }
             }
         }
         stage('test'){
