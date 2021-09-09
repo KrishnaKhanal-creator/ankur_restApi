@@ -61,4 +61,13 @@ pipeline{
 
     }
 }
+///Users/krishnakhanal/Desktop/File/Tools/Maven/apache-maven-3.8.2
+
+// 'FROM BASH_PROFILE'
+// /usr/local/mysql-8.0.23-macos10.15-x86_64/bin
+// export JENKINS_HOME=/Users/krishnakhanal/Desktop/File/Tools/Jenkins/JenkinsHome
+// export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+// export M2_HOME=/User/krishnakhanal/Desktop/File/Tools/Maven/maven_3.8
+// PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
+// export PATH
 
